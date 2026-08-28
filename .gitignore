@@ -1,6 +1,11 @@
 # Java compiled files
 *.class
 
+# Build output
+out/
+build/
+dist/
+
 # IDE settings
 .vscode/
 .idea/
