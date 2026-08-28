@@ -51,19 +51,11 @@ public class LibraryMenu {
                         break;
 
                     case 4:
-                        System.out.println();
-                        System.out.println(
-                                "Save Library functionality will be added next."
-                        );
-                        ActivityLogger.log("SAVE_LIBRARY");
+                        saveLibrary();
                         break;
 
                     case 5:
-                        System.out.println();
-                        System.out.println(
-                                "Load Library functionality will be added next."
-                        );
-                        ActivityLogger.log("LOAD_LIBRARY");
+                        loadLibrary();
                         break;
 
                     case 6:
@@ -215,6 +207,49 @@ public class LibraryMenu {
             );
 
             scanner.nextLine();
+        }
+    }
+
+    /**
+     * Saves the current library to a serialized file.
+     */
+    private void saveLibrary() {
+
+        System.out.println();
+        System.out.println("===== SAVING LIBRARY =====");
+
+        LibrarySerializer.saveLibrary(library);
+
+        ActivityLogger.log("SAVE_LIBRARY");
+    }
+
+    /**
+     * Loads the library from a serialized file.
+     */
+    private void loadLibrary() {
+
+        System.out.println();
+        System.out.println("===== LOADING LIBRARY =====");
+
+        Library loadedLibrary = LibrarySerializer.loadLibrary();
+
+        if (loadedLibrary != null) {
+
+            library = loadedLibrary;
+
+            ActivityLogger.log("LOAD_LIBRARY");
+
+            System.out.println();
+            System.out.println(
+                    "Library data has been loaded successfully."
+            );
+
+        } else {
+
+            System.out.println();
+            System.out.println(
+                    "Library could not be loaded."
+            );
         }
     }
 }
