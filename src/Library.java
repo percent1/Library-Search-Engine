@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,8 +8,9 @@ import java.util.ArrayList;
 /**
  * Represents a library containing a collection of books.
  *
- * The Library class can load book information from a text file
- * and store the information as Book objects.
+ * The Library class can load book information from a text file,
+ * store the information as Book objects, display books, and
+ * search for books by title, author, or publication year.
  */
 public class Library implements Serializable {
 
@@ -97,6 +99,47 @@ public class Library implements Serializable {
     }
 
     /**
+     * Searches for books by title, author, or publication year.
+     *
+     * The search is case-insensitive for title and author.
+     * The publication year is also matched using its text value.
+     *
+     * @param searchTerm the text to search for
+     * @return a list containing matching books
+     */
+    public ArrayList<Book> searchBooks(String searchTerm) {
+
+        ArrayList<Book> results = new ArrayList<>();
+
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return results;
+        }
+
+        String searchValue = searchTerm.trim().toLowerCase();
+
+        for (Book book : books) {
+
+            boolean titleMatches = book.getTitle()
+                    .toLowerCase()
+                    .contains(searchValue);
+
+            boolean authorMatches = book.getAuthor()
+                    .toLowerCase()
+                    .contains(searchValue);
+
+            boolean yearMatches = String.valueOf(
+                    book.getPublicationYear()
+            ).contains(searchValue);
+
+            if (titleMatches || authorMatches || yearMatches) {
+                results.add(book);
+            }
+        }
+
+        return results;
+    }
+
+    /**
      * Displays all books currently stored in the library.
      */
     public void displayBooks() {
@@ -114,3 +157,4 @@ public class Library implements Serializable {
         }
     }
 }
+
