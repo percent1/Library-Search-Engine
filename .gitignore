@@ -1,0 +1,12 @@
+# Java compiled files
+*.class
+
+# IDE settings
+.vscode/
+.idea/
+.classpath
+.project
+.settings/
+
+# macOS
+.DS_Store
