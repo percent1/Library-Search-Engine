@@ -38,6 +38,7 @@ public class LibraryMenu {
                 switch (choice) {
 
                     case 1:
+                        ActivityLogger.log("VIEW_ALL_BOOKS");
                         library.displayBooks();
                         break;
 
@@ -49,7 +50,25 @@ public class LibraryMenu {
                         sortBooks();
                         break;
 
+                    case 4:
+                        System.out.println();
+                        System.out.println(
+                                "Save Library functionality will be added next."
+                        );
+                        ActivityLogger.log("SAVE_LIBRARY");
+                        break;
+
+                    case 5:
+                        System.out.println();
+                        System.out.println(
+                                "Load Library functionality will be added next."
+                        );
+                        ActivityLogger.log("LOAD_LIBRARY");
+                        break;
+
                     case 6:
+                        ActivityLogger.log("EXIT");
+
                         System.out.println();
                         System.out.println(
                                 "Thank you for using the Library Search Engine!"
@@ -59,7 +78,7 @@ public class LibraryMenu {
                     default:
                         System.out.println();
                         System.out.println(
-                                "Invalid option. Please choose 1, 2, 3, or 6."
+                                "Invalid option. Please choose 1, 2, 3, 4, 5, or 6."
                         );
                 }
 
@@ -107,6 +126,8 @@ public class LibraryMenu {
 
         String searchTerm = scanner.nextLine();
 
+        ActivityLogger.log("SEARCH: " + searchTerm);
+
         ArrayList<Book> results = library.searchBooks(searchTerm);
 
         System.out.println();
@@ -146,6 +167,9 @@ public class LibraryMenu {
 
                 case 1:
                     SortUtil.sortByTitle(library.getBooks());
+
+                    ActivityLogger.log("SORT: TITLE");
+
                     System.out.println(
                             "Books sorted by title."
                     );
@@ -154,6 +178,9 @@ public class LibraryMenu {
 
                 case 2:
                     SortUtil.sortByAuthor(library.getBooks());
+
+                    ActivityLogger.log("SORT: AUTHOR");
+
                     System.out.println(
                             "Books sorted by author."
                     );
@@ -164,6 +191,11 @@ public class LibraryMenu {
                     SortUtil.sortByPublicationYear(
                             library.getBooks()
                     );
+
+                    ActivityLogger.log(
+                            "SORT: PUBLICATION_YEAR"
+                    );
+
                     System.out.println(
                             "Books sorted by publication year."
                     );
